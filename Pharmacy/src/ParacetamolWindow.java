@@ -18,21 +18,20 @@ public class ParacetamolWindow extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
 
-        // Основной контейнер
+        double price = MedicineDatabase.getPrice("Парацетамол");
+
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(200, 230, 229));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Загружаем и уменьшаем изображение
         ImageIcon icon = new ImageIcon("/Users/inkonio/Desktop/Utilities/Prokec/exam/src/images/paracetomo.png");
         Image scaledImage = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
         JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
 
-        // Панель с текстом
         JPanel textPanel = new JPanel(new GridLayout(2, 1, 5, 5));
         textPanel.setBackground(new Color(200, 230, 229));
 
-        JLabel nameLabel = new JLabel("Парацетамол - 500 тг.");
+        JLabel nameLabel = new JLabel("Парацетамол - " + price + " тг.");
         nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
         JLabel descLabel = new JLabel("<html>Снижает температуру и боль.<br>Противовоспалительное действие.</html>");
@@ -41,11 +40,9 @@ public class ParacetamolWindow extends JFrame {
         textPanel.add(nameLabel);
         textPanel.add(descLabel);
 
-        // Панель для управления количеством и кнопок
         JPanel controlPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         controlPanel.setBackground(new Color(200, 230, 229));
 
-        // Панель для счетчика
         JPanel countPanel = new JPanel();
         countPanel.setBackground(new Color(200, 230, 229));
 
@@ -66,7 +63,6 @@ public class ParacetamolWindow extends JFrame {
         countPanel.add(Box.createHorizontalStrut(10));
         countPanel.add(plusButton);
 
-        // Панель для кнопок
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(200, 230, 229));
 
@@ -88,7 +84,6 @@ public class ParacetamolWindow extends JFrame {
         controlPanel.add(countPanel);
         controlPanel.add(buttonPanel);
 
-        // Добавляем компоненты в основной контейнер
         panel.add(imageLabel, BorderLayout.WEST);
         panel.add(textPanel, BorderLayout.CENTER);
         panel.add(controlPanel, BorderLayout.EAST);
@@ -97,7 +92,6 @@ public class ParacetamolWindow extends JFrame {
         setVisible(true);
     }
 
-    // Метод для добавления в корзину с учетом количества
     private void addToBasket() {
         if (count > 0) {
             for (int i = 0; i < count; i++) {
@@ -106,7 +100,6 @@ public class ParacetamolWindow extends JFrame {
         }
     }
 
-    // Уменьшаем количество
     private void decreaseCount() {
         if (count > 0) {
             count--;
@@ -114,13 +107,11 @@ public class ParacetamolWindow extends JFrame {
         }
     }
 
-    // Увеличиваем количество
     private void increaseCount() {
         count++;
         countLabel.setText(String.valueOf(count));
     }
 
-    // Метод для стилизованных кнопок
     private JButton createStyledButton(String text, Color bgColor, Color fgColor) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 16));
